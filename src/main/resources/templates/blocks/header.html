@@ -1,15 +1,46 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
+  <meta charset="UTF-8">
+  <title>Навигация</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<header>
-  <div>
-    <form th:action="@{/logout}" method="post">
-      <button type="submit">Выход</button>
-    </form>
+
+<div class="container my-3">
+  <form th:action="@{/logout}" method="post">
+    <button type="submit" class="btn btn-danger">Выход</button>
+  </form>
+</div>
+
+<nav class="container my-5 d-flex justify-content-center">
+  <div sec:authorize="hasAuthority('ADMIN')">
+    <div class="btn-group" role="group">
+      <a th:href="@{/admin}" class="btn btn-primary">Меню</a>
+    </div>
   </div>
 
-</header>
+  <div sec:authorize="hasAuthority('MANAGER')">
+    <div class="btn-group" role="group">
+      <a th:href="@{/manager/insurance}" class="btn btn-primary">Страхования</a>
+      <a th:href="@{/manager/feedback}" class="btn btn-primary">Отзывы</a>
+      <a th:href="@{/manager/car}" class="btn btn-primary">Автомобили</a>
+      <a th:href="@{/manager/location}" class="btn btn-primary">Локации</a>
+      <a th:href="@{/manager/maintenance}" class="btn btn-primary">Обслуживания</a>
+      <a th:href="@{/manager/payment}" class="btn btn-primary">Платежи</a>
+      <a th:href="@{/manager/rental}" class="btn btn-primary">Аренды</a>
+    </div>
+  </div>
+
+  <div sec:authorize="hasAuthority('CUSTOMER')">
+    <div class="btn-group" role="group">
+      <a th:href="@{/customer/feedback}" class="btn btn-primary">Отзывы</a>
+    </div>
+  </div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

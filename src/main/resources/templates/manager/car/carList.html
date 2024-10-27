@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Автомобили</title>
+</head>
+<body>
+<div th:insert="blocks/header"></div>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<h2>Автомобили</h2>
+<a href="/manager/car/add">Добавить автомобиль</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Марка</th>
+        <th>Модель</th>
+        <th>Год выпуска</th>
+        <th>Номерной знак</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="car : ${cars}">
+        <td th:text="${car.id}"></td>
+        <td th:text="${car.make}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.year}"></td>
+        <td th:text="${car.licensePlate}"></td>
+        <td>
+            <a th:href="@{/manager/car/edit/{id}(id=${car.id})}">Редактировать</a> |
+            <a th:href="@{/manager/car/delete/{id}(id=${car.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

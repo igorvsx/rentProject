@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить автомобиль</title>
+</head>
+<body>
+<h1>Добавление автомобиля</h1>
+
+<div th:if="${message}">
+  <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/manager/car/add}" th:object="${car}" method="post">
+  <div>
+    <label>Марка:</label>
+    <input type="text" th:field="*{make}" />
+  </div>
+  <div>
+    <label>Модель:</label>
+    <input type="text" th:field="*{model}" />
+  </div>
+  <div>
+    <label>Год выпуска:</label>
+    <input type="number" th:field="*{year}" />
+  </div>
+  <div>
+    <label>Номерной знак:</label>
+    <input type="text" th:field="*{licensePlate}" />
+  </div>
+  <div>
+    <input type="submit" value="Добавить автомобиль" />
+  </div>
+</form>
+
+<a href="/manager/car">Назад</a>
+</body>
+</html>

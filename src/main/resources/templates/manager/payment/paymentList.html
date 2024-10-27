@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Платежи</title>
+</head>
+<body>
+<div th:insert="blocks/header"></div>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<h2>Платежи</h2>
+<a href="/manager/payment/add">Добавить платёж</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Сумма платежа</th>
+        <th>Дата платежа</th>
+        <th>Способ оплаты</th>
+        <th>Аренда</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="payment : ${payments}">
+        <td th:text="${payment.id}"></td>
+        <td th:text="${payment.amount}"></td>
+        <td th:text="${payment.paymentDate}"></td>
+        <td th:text="${payment.paymentMethod}"></td>
+        <td th:text="${payment.rental.user.username} + ' ' + ${payment.rental.car.make} + ' ' + ${payment.rental.car.model}"></td>
+        <td>
+            <a th:href="@{/manager/payment/edit/{id}(id=${payment.id})}">Редактировать</a> |
+            <a th:href="@{/manager/payment/delete/{id}(id=${payment.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

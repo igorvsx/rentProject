@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать страхование</title>
+</head>
+<body>
+<h1>Редактировать страхование</h1>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/manager/insurance/edit/{id}(id=${insurance.id})}" th:object="${insurance}" method="post">
+    <div>
+        <label>Страховая компания:</label>
+        <input type="text" th:field="*{insuranceProvider}" />
+    </div>
+    <div>
+        <label>Номер полиса:</label>
+        <input type="text" th:field="*{policyNumber}" />
+    </div>
+    <div>
+        <label>Сумма покрытия:</label>
+        <input type="number" th:field="*{coverageAmount}" step="0.01" min="0"/>
+    </div>
+    <div>
+        <label>Дата начала действия:</label>
+        <input type="date" th:field="*{validFrom}" />
+    </div>
+    <div>
+        <label>Дата окончания действия:</label>
+        <input type="date" th:field="*{validUntil}" />
+    </div>
+    <div>
+    <label>Автомобиль:</label>
+    <select th:field="*{car}">
+        <option th:each="car : ${cars}"
+                th:value="${car.id}"
+                th:text="${car.make} + ' ' + ${car.model}"
+                th:selected="${car.id}">
+        </option>
+    </select>
+    </div>
+    <div>
+        <input type="submit" value="Сохранить" />
+    </div>
+</form>
+<a href="/manager/insurance">Назад</a>
+</body>
+</html>

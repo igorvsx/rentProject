@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <title>Регистрация</title>
 </head>
 <body>
-$END$
+<div th:if="${message}">
+  <p th:text="${message}"></p>
+</div>
+<form th:action="@{/registration}" method="post">
+  <div><label> Логин : <input type="text" name="username"/> </label></div>
+  <div><label> Почта : <input type="text" name="email"/> </label></div>
+  <div><label> Пароль : <input type="password" name="password"/> </label></div>
+
+  <div><input type="submit" value="Регистрация"/></div>
+</form>
+<a href="/login">К авторизации</a>
 </body>
 </html>

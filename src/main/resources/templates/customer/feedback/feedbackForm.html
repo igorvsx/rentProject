@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать отзыв</title>
+</head>
+<body>
+<h1>Редактировать отзыв</h1>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/customer/feedback/edit/{id}(id=${feedback.id})}" th:object="${feedback}" method="post">
+    <div>
+        <label>Комментарий:</label>
+        <input type="text" th:field="*{comment}" />
+    </div>
+    <div>
+        <label>Рейтинг:</label>
+        <input type="number" th:field="*{rating}" />
+    </div>
+        <label>Поездки:</label>
+        <select th:field="*{rental}">
+            <option th:each="rental : ${rentals}"
+                    th:value="${rental.id}"
+                    th:text="${rental.location.name}"
+                    th:selected="${feedback.rental.id}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Сохранить" />
+    </div>
+</form>
+<a href="/customer/feedback">Назад</a>
+</body>
+</html>

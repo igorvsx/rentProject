@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обслуживания</title>
+</head>
+<body>
+<div th:insert="blocks/header"></div>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<h2>Обслуживания</h2>
+<a href="/manager/maintenance/add">Добавить обслуживание</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Тип обслуживания</th>
+        <th>Дата обслуживания</th>
+        <th>Стоимость</th>
+        <th>Автомобиль</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="maintenance : ${maintenances}">
+        <td th:text="${maintenance.id}"></td>
+        <td th:text="${maintenance.type}"></td>
+        <td th:text="${maintenance.date}"></td>
+        <td th:text="${maintenance.cost}"></td>
+        <td th:text="${maintenance.car.make} + ' ' + ${maintenance.car.model} + ' ' + ${maintenance.car.licensePlate}"></td>
+        <td>
+            <a th:href="@{/manager/maintenance/edit/{id}(id=${maintenance.id})}">Редактировать</a> |
+            <a th:href="@{/manager/maintenance/delete/{id}(id=${maintenance.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

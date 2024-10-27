@@ -1,4 +1,7 @@
 package com.example.rentproject.repository;
 
-public interface PaymentRepository {
+import com.example.rentproject.model.PaymentModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PaymentRepository extends JpaRepository<PaymentModel, Long> {
 }

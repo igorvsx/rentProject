@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Мои отзывы</title>
+    <title>Отзывы</title>
 </head>
 <body>
 <div th:insert="blocks/header"></div>
@@ -11,8 +11,8 @@
     <p th:text="${message}"></p>
 </div>
 
-<h2>Мои отзывы</h2>
-<a href="/customer/add">Добавить отзыв</a>
+<h2>Отзывы</h2>
+<a href="/manager/feedback/add">Добавить отзыв</a>
 <table>
     <thead>
     <tr>
@@ -31,8 +31,8 @@
         <td th:text="${feedback.feedbackDate}"></td>
         <td th:text="${feedback.rental.location.name}"></td>
         <td>
-            <a th:href="@{/customer/edit/{id}(id=${feedback.id})}">Редактировать</a> |
-            <a th:href="@{/customer/delete/{id}(id=${feedback.id})}">Удалить</a>
+            <a th:href="@{/manager/feedback/edit/{id}(id=${feedback.id})}">Редактировать</a> |
+            <a th:href="@{/manager/feedback/delete/{id}(id=${feedback.id})}">Удалить</a>
         </td>
     </tr>
     </tbody>

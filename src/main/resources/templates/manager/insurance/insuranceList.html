@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Страхования</title>
+</head>
+<body>
+<div th:insert="blocks/header"></div>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<h2>Страхования</h2>
+<a href="/manager/insurance/add">Добавить страхование</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Страховая компания</th>
+        <th>Номер полиса</th>
+        <th>Сумма покрытия</th>
+        <th>Дата начала действия</th>
+        <th>Дата окончания действия</th>
+        <th>Автомобиль</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="insurance : ${insurances}">
+        <td th:text="${insurance.id}"></td>
+        <td th:text="${insurance.insuranceProvider}"></td>
+        <td th:text="${insurance.policyNumber}"></td>
+        <td th:text="${insurance.coverageAmount}"></td>
+        <td th:text="${insurance.validFrom}"></td>
+        <td th:text="${insurance.validUntil}"></td>
+        <td th:text="${insurance.car.make} + ' ' + ${insurance.car.model} + ' ' + ${insurance.car.licensePlate}"></td>
+        <td>
+            <a th:href="@{/manager/insurance/edit/{id}(id=${insurance.id})}">Редактировать</a> |
+            <a th:href="@{/manager/insurance/delete/{id}(id=${insurance.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

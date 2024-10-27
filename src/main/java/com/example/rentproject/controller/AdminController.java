@@ -1,4 +1,4 @@
-package com.example.rentproject.contoller;
+package com.example.rentproject.controller;
 
 import com.example.rentproject.model.RoleEnum;
 import com.example.rentproject.model.UserModel;

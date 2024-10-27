@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать платёж</title>
+</head>
+<body>
+<h1>Редактировать платёж</h1>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/manager/payment/edit/{id}(id=${payment.id})}" th:object="${payment}" method="post">
+    <div>
+        <label>Сумма платежа:</label>
+        <input type="number" th:field="*{amount}" />
+    </div>
+    <div>
+        <label>Дата платежа:</label>
+        <input type="date" th:field="*{paymentDate}" />
+    </div>
+    <div>
+        <label>Способ оплаты:</label>
+        <input type="text" th:field="*{paymentMethod}" />
+    </div>
+    <div>
+        <label>Аренда:</label>
+        <select th:field="*{rental}">
+            <option th:each="rental : ${rentals}"
+                    th:value="${rental.id}"
+                    th:text="${rental.user.username} + ' ' + ${rental.car.make} + ' ' + ${rental.car.model}"
+                    th:selected="${rental.id}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Сохранить" />
+    </div>
+</form>
+<a href="/manager/payment">Назад</a>
+</body>
+</html>

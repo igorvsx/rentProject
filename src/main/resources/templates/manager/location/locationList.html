@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Локации</title>
+</head>
+<body>
+<div th:insert="blocks/header"></div>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<h2>Локации</h2>
+<a href="/manager/location/add">Добавить локацию</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Адрес</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="location : ${locations}">
+        <td th:text="${location.id}"></td>
+        <td th:text="${location.name}"></td>
+        <td th:text="${location.address}"></td>
+        <td>
+            <a th:href="@{/manager/location/edit/{id}(id=${location.id})}">Редактировать</a> |
+            <a th:href="@{/manager/location/delete/{id}(id=${location.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

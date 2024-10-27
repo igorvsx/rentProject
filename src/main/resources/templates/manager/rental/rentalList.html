@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Аренды</title>
+</head>
+<body>
+<div th:insert="blocks/header"></div>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<h2>Аренды</h2>
+<a href="/manager/rental/add">Добавить аренду</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Дата начала аренды</th>
+        <th>Дата окончания аренды</th>
+        <th>Автомобиль</th>
+        <th>Пользователь</th>
+        <th>Локация</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rental : ${rentals}">
+        <td th:text="${rental.id}"></td>
+        <td th:text="${rental.startDate}"></td>
+        <td th:text="${rental.endDate}"></td>
+        <td th:text="${rental.car.make} + ' ' + ${rental.car.model} + ' ' + ${rental.car.licensePlate}"></td>
+        <td th:text="${rental.user.username}"></td>
+        <td th:text="${rental.location.name} + ' ' + ${rental.location.address}"></td>
+        <td>
+            <a th:href="@{/manager/rental/edit/{id}(id=${rental.id})}">Редактировать</a> |
+            <a th:href="@{/manager/rental/delete/{id}(id=${rental.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

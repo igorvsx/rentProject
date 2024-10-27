@@ -11,7 +11,7 @@
     <p th:text="${message}"></p>
 </div>
 
-<form th:action="@{/customer/edit/{id}(id=${feedback.id})}" th:object="${feedback}" method="post">
+<form th:action="@{/manager/feedback/edit/{id}(id=${feedback.id})}" th:object="${feedback}" method="post">
     <div>
         <label>Комментарий:</label>
         <input type="text" th:field="*{comment}" />
@@ -20,6 +20,11 @@
         <label>Рейтинг:</label>
         <input type="number" th:field="*{rating}" />
     </div>
+    <div>
+        <label>Дата отзыва:</label>
+        <input type="date" th:field="*{feedbackDate}" />
+    </div>
+    <div>
         <label>Поездки:</label>
         <select th:field="*{rental}">
             <option th:each="rental : ${rentals}"
@@ -33,6 +38,6 @@
         <input type="submit" value="Сохранить" />
     </div>
 </form>
-<a href="/customer">Назад</a>
+<a href="/manager/feedback">Назад</a>
 </body>
 </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактировать аренду</title>
+</head>
+<body>
+<h1>Редактировать аренду</h1>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/manager/rental/edit/{id}(id=${rental.id})}" th:object="${rental}" method="post">
+    <div>
+        <label>Дата начала аренды:</label>
+        <input type="date" th:field="*{startDate}" />
+    </div>
+    <div>
+        <label>Дата окончания аренды:</label>
+        <input type="date" th:field="*{endDate}" />
+    </div>
+    <div>
+        <label>Автомобиль:</label>
+        <select th:field="*{car}">
+            <option th:each="car : ${cars}"
+                    th:value="${car.id}"
+                    th:text="${car.make} + ' ' + ${car.model}"
+                    th:selected="${car.id}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <label>Пользователь:</label>
+        <select th:field="*{user}">
+            <option th:each="user : ${users}"
+                    th:value="${user.userId}"
+                    th:text="${user.username}"
+                    th:selected="${user.userId}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <label>Локация:</label>
+        <select th:field="*{location}">
+            <option th:each="location : ${locations}"
+                    th:value="${location.id}"
+                    th:text="${location.name} + ' ' + ${location.address}"
+                    th:selected="${location.id}">
+            </option>
+        </select>
+    </div>
+    <div>
+        <input type="submit" value="Сохранить" />
+    </div>
+</form>
+<a href="/manager/rental">Назад</a>
+</body>
+</html>

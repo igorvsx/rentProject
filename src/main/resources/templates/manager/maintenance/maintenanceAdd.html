@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить обслуживание</title>
+</head>
+<body>
+<h1>Добавление обслуживания</h1>
+
+<div th:if="${message}">
+  <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/manager/maintenance/add}" th:object="${maintenance}" method="post">
+  <div>
+    <label>Тип обслуживания:</label>
+    <input type="text" th:field="*{type}" />
+  </div>
+  <div>
+    <label>Дата обслуживания:</label>
+    <input type="date" th:field="*{date}" />
+  </div>
+  <div>
+    <label>Стоимость:</label>
+    <input type="number" th:field="*{cost}" />
+  </div>
+  <div>
+  <label>Автомобиль:</label>
+  <select th:field="*{car}">
+    <option th:each="car : ${cars}"
+            th:value="${car.id}"
+            th:text="${car.make} + ' ' + ${car.model}"
+            th:selected="${car.id}">
+    </option>
+  </select>
+  </div>
+  <div>
+    <input type="submit" value="Добавить отзыв" />
+  </div>
+</form>
+
+<a href="/manager/maintenance">Назад</a>
+</body>
+</html>

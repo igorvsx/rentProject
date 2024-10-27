@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить локацию</title>
+</head>
+<body>
+<h1>Добавление локации</h1>
+
+<div th:if="${message}">
+  <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/manager/location/add}" th:object="${location}" method="post">
+  <div>
+    <label>Название:</label>
+    <input type="text" th:field="*{name}" />
+  </div>
+  <div>
+    <label>Адрес:</label>
+    <input type="text" th:field="*{address}" />
+  </div>
+  <div>
+    <input type="submit" value="Добавить локацию" />
+  </div>
+</form>
+
+<a href="/manager/location">Назад</a>
+</body>
+</html>
