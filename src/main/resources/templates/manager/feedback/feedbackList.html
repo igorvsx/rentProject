@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои отзывы</title>
+</head>
+<body>
+<div th:insert="blocks/header"></div>
+
+<div th:if="${message}">
+    <p th:text="${message}"></p>
+</div>
+
+<h2>Мои отзывы</h2>
+<a href="/customer/add">Добавить отзыв</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Комментарий</th>
+        <th>Рейтинг</th>
+        <th>Дата отзыва</th>
+        <th>Поездка</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="feedback : ${feedbacks}">
+        <td th:text="${feedback.id}"></td>
+        <td th:text="${feedback.comment}"></td>
+        <td th:text="${feedback.rating}"></td>
+        <td th:text="${feedback.feedbackDate}"></td>
+        <td th:text="${feedback.rental.location.name}"></td>
+        <td>
+            <a th:href="@{/customer/edit/{id}(id=${feedback.id})}">Редактировать</a> |
+            <a th:href="@{/customer/delete/{id}(id=${feedback.id})}">Удалить</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить отзыв</title>
+</head>
+<body>
+<h1>Добавление отзыва</h1>
+
+<div th:if="${message}">
+  <p th:text="${message}"></p>
+</div>
+
+<form th:action="@{/customer/add}" th:object="${feedback}" method="post">
+  <div>
+    <label>Комментарий:</label>
+    <input type="text" th:field="*{comment}" placeholder="Введите комментарий" />
+    <div th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"></div>
+  </div>
+  <div>
+    <label>Рейтинг:</label>
+    <input type="number" th:field="*{rating}" placeholder="Введите рейтинг" />
+    <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
+  </div>
+    <label>Поездки:</label>
+    <select th:field="*{rental}">
+      <option th:each="rental : ${rentals}" th:value="${rental.id}" th:text="${rental.location.name}"></option>
+    </select>
+  </div>
+  <div>
+    <input type="submit" value="Добавить отзыв" />
+  </div>
+</form>
+
+<a href="/customer">Назад</a>
+</body>
+</html>
