@@ -1,5 +1,7 @@
 package com.example.rentproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Set;
@@ -17,7 +19,8 @@ public class LocationModel {
     @NotBlank(message = "Адрес не может быть пустым")
     private String address;
 
-    @OneToMany(mappedBy = "location")
+    @OneToMany(mappedBy = "location", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<RentalModel> rentals;
 
     public Long getId() {

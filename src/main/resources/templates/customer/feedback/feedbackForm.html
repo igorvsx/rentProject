@@ -12,6 +12,7 @@
 </div>
 
 <form th:action="@{/customer/feedback/edit/{id}(id=${feedback.id})}" th:object="${feedback}" method="post">
+    <input type="hidden" th:field="*{id}"/>
     <div>
         <label>Комментарий:</label>
         <input type="text" th:field="*{comment}" />
@@ -20,12 +21,17 @@
         <label>Рейтинг:</label>
         <input type="number" th:field="*{rating}" />
     </div>
+    <div>
+        <label>Дата отзыва:</label>
+        <input type="date" th:field="*{feedbackDate}"/>
+    </div>
+    <div>
         <label>Поездки:</label>
-        <select th:field="*{rental}">
+        <select th:field="*{rental.id}">
             <option th:each="rental : ${rentals}"
                     th:value="${rental.id}"
                     th:text="${rental.location.name}"
-                    th:selected="${feedback.rental.id}">
+                    th:selected="${rental.id}">
             </option>
         </select>
     </div>

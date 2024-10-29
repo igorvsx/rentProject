@@ -22,7 +22,7 @@
     </div>
     <div>
         <label>Автомобиль:</label>
-        <select th:field="*{car}">
+        <select th:field="*{car.id}">
             <option th:each="car : ${cars}"
                     th:value="${car.id}"
                     th:text="${car.make} + ' ' + ${car.model}"
@@ -32,7 +32,7 @@
     </div>
     <div>
         <label>Пользователь:</label>
-        <select th:field="*{user}">
+        <select th:field="*{user.userId}">
             <option th:each="user : ${users}"
                     th:value="${user.userId}"
                     th:text="${user.username}"
@@ -42,7 +42,7 @@
     </div>
     <div>
         <label>Локация:</label>
-        <select th:field="*{location}">
+        <select th:field="*{location.id}">
             <option th:each="location : ${locations}"
                     th:value="${location.id}"
                     th:text="${location.name} + ' ' + ${location.address}"

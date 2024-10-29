@@ -25,7 +25,7 @@ public class PaymentModel {
     @NotBlank(message = "Способ оплаты не может быть пустым")
     private String paymentMethod;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rental_id", nullable = false)
     @NotNull(message = "Платеж должен быть связан с арендой")
     private RentalModel rental;

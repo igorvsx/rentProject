@@ -22,7 +22,7 @@
     </div>
     <div>
         <label>Сумма покрытия:</label>
-        <input type="number" th:field="*{coverageAmount}" step="0.01" min="0"/>
+        <input type="number" th:field="*{coverageAmount}" step="0.01" min="0" />
     </div>
     <div>
         <label>Дата начала действия:</label>
@@ -33,14 +33,14 @@
         <input type="date" th:field="*{validUntil}" />
     </div>
     <div>
-    <label>Автомобиль:</label>
-    <select th:field="*{car}">
-        <option th:each="car : ${cars}"
-                th:value="${car.id}"
-                th:text="${car.make} + ' ' + ${car.model}"
-                th:selected="${car.id}">
-        </option>
-    </select>
+        <label>Автомобиль:</label>
+        <select th:field="*{car.id}" required> <!-- Изменено на car.id -->
+            <option th:each="car : ${cars}"
+                    th:value="${car.id}"
+                    th:text="${car.make} + ' ' + ${car.model}"
+                    th:selected="${car.id}"> <!-- Правильное связывание с id -->
+            </option>
+        </select>
     </div>
     <div>
         <input type="submit" value="Сохранить" />

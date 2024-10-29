@@ -26,11 +26,11 @@
     </div>
     <div>
         <label>Автомобиль:</label>
-        <select th:field="*{car}">
+        <select th:field="*{car.id}" required> <!-- Изменено на car.id -->
             <option th:each="car : ${cars}"
                     th:value="${car.id}"
                     th:text="${car.make} + ' ' + ${car.model}"
-                    th:selected="${car.id}">
+                    th:selected="${car.id}"> <!-- Правильное связывание с id -->
             </option>
         </select>
     </div>

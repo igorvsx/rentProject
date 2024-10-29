@@ -1,8 +1,8 @@
 package com.example.rentproject.controller;
 
+import com.example.rentproject.config.ApiConfig;
 import com.example.rentproject.model.RoleEnum;
 import com.example.rentproject.model.UserModel;
-import com.example.rentproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.Collections;
@@ -17,10 +18,13 @@ import java.util.Collections;
 @Controller
 public class RegistrationController {
     @Autowired
-    private UserRepository userRepository;
+    private ApiConfig apiConfig;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping("/registration")
     public String regView() {
@@ -34,11 +38,14 @@ public class RegistrationController {
             return "registration";
         }
 
-        if (userRepository.existsByUsername(user.getUsername())) {
+        UserModel existingUser = restTemplate.getForObject(apiConfig.getApiUrl() + "/user/username/" + user.getUsername(), UserModel.class);
+        if (existingUser != null) {
             model.addAttribute("message", "Пользователь с таким логином уже существует");
             return "registration";
         }
-        else if (userRepository.existsByEmail(user.getEmail())) {
+
+        existingUser = restTemplate.getForObject(apiConfig.getApiUrl() + "/user/email/" + user.getEmail(), UserModel.class);
+        if (existingUser != null) {
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
             return "registration";
         }
@@ -46,7 +53,7 @@ public class RegistrationController {
         user.setActive(true);
         user.setRoles(Collections.singleton(RoleEnum.CUSTOMER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        restTemplate.postForObject(apiConfig.getApiUrl(), user, UserModel.class);
         return "redirect:/login";
     }
 }

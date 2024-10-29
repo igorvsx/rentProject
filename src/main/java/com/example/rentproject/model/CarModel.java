@@ -1,5 +1,7 @@
 package com.example.rentproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Set;
@@ -25,7 +27,8 @@ public class CarModel {
     @Pattern(regexp = "^[A-Z0-9-]+$", message = "Номерной знак может содержать только буквы, цифры и дефисы")
     private String licensePlate;
 
-    @OneToOne(mappedBy = "car")
+    @OneToOne(mappedBy = "car", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private InsuranceModel insurances;
 
     public Long getId() {

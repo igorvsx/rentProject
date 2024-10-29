@@ -26,11 +26,10 @@
   </div>
   <div>
     <label>Аренда:</label>
-    <select th:field="*{rental}">
+    <select th:field="*{rental.id}" required>
       <option th:each="rental : ${rentals}"
               th:value="${rental.id}"
-              th:text="${rental.user.username} + ' ' + ${rental.car.make} + ' ' + ${rental.car.model}"
-              th:selected="${rental.id}">
+              th:text="${rental.user.username} + ' ' + ${rental.car.make} + ' ' + ${rental.car.model}">
       </option>
     </select>
   </div>

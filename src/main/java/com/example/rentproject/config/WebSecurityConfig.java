@@ -1,7 +1,6 @@
 package com.example.rentproject.config;
 
 import com.example.rentproject.model.UserModel;
-import com.example.rentproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,17 +15,22 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.client.RestTemplate;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig {
     @Autowired
-    private UserRepository userRepository;
+    private ApiConfig apiConfig;
 
     @Lazy
     @Autowired
     private CustomSuccessHandler customSuccessHandler;
+
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -36,7 +40,8 @@ public class WebSecurityConfig {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(username -> {
-            UserModel user = userRepository.findByUsername(username);
+            System.out.println("API URL:" + apiConfig.getApiUrl());
+            UserModel user = restTemplate().getForObject(apiConfig.getApiUrl() + "/user/username/" + username, UserModel.class);
             if (user == null) {
                 throw new UsernameNotFoundException("Такой пользователь не существует");
             }

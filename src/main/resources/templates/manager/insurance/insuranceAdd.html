@@ -34,13 +34,12 @@
     </div>
     <div>
     <label>Автомобиль:</label>
-    <select th:field="*{car}">
-        <option th:each="car : ${cars}"
-                th:value="${car.id}"
-                th:text="${car.make} + ' ' + ${car.model}"
-                th:selected="${car.id}">
-        </option>
-    </select>
+        <select th:field="*{car.id}" required> <!-- Здесь изменено на car.id -->
+            <option th:each="car : ${cars}"
+                    th:value="${car.id}"
+                    th:text="${car.make} + ' ' + ${car.model}">
+            </option>
+        </select>
     </div>
     <div>
         <input type="submit" value="Добавить страхование" />

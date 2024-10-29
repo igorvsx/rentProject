@@ -22,9 +22,16 @@
     <input type="number" th:field="*{rating}" placeholder="Введите рейтинг" />
     <div th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
   </div>
+  <div>
+    <label>Дата отзыва:</label>
+    <input type="date" th:field="*{feedbackDate}" placeholder="Введите дату отзыва" />
+    <div th:if="${#fields.hasErrors('feedbackDate')}" th:errors="*{feedbackDate}"></div>
+  </div>
     <label>Поездки:</label>
-    <select th:field="*{rental}">
-      <option th:each="rental : ${rentals}" th:value="${rental.id}" th:text="${rental.location.name}"></option>
+    <select th:field="*{rental.id}" required>
+      <option th:each="rental : ${rentals}"
+              th:value="${rental.id}"
+              th:text="${rental.location.name}"></option>
     </select>
   </div>
   <div>

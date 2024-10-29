@@ -23,18 +23,18 @@ public class RentalModel {
     @Future(message = "Дата окончания аренды должна быть в будущем")
     private LocalDate endDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", nullable = false)
     @NotNull(message = "Необходимо указать автомобиль для аренды")
     private CarModel car;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     @NotNull(message = "Необходимо указать пользователя для аренды")
     private UserModel user;
 
-    @ManyToOne
-    @JoinColumn(name = "location_id", nullable = false) // добавляем связь с LocationModel
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "location_id", nullable = false)
     @NotNull(message = "Необходимо указать локацию для аренды")
     private LocationModel location;
 

@@ -29,8 +29,10 @@
   </div>
   <div>
     <label>Поездки:</label>
-    <select th:field="*{rental}">
-      <option th:each="rental : ${rentals}" th:value="${rental.id}" th:text="${rental.location.name}"></option>
+    <select th:field="*{rental.id}" required>
+      <option th:each="rental : ${rentals}"
+              th:value="${rental.id}"
+              th:text="${rental.location.name}"></option>
     </select>
   </div>
   <div>

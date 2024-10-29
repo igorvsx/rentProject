@@ -26,7 +26,7 @@ public class MaintenanceModel {
     @DecimalMin(value = "0.0", inclusive = false, message = "Стоимость должна быть положительным числом")
     private Double cost;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", nullable = false)
     @NotNull(message = "Необходимо указать автомобиль для обслуживания")
     private CarModel car;

@@ -33,7 +33,7 @@ public class InsuranceModel {
     @Future(message = "Дата окончания действия полиса должна быть в будущем")
     private LocalDate validUntil;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id", nullable = false, unique = true)
     @NotNull(message = "Необходимо указать автомобиль для страхования")
     private CarModel car;

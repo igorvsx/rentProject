@@ -26,7 +26,7 @@ public class FeedbackModel {
     @NotNull(message = "Дата отзыва обязательна")
     private LocalDate feedbackDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "rental_id", nullable = false)
     @NotNull(message = "Необходимо указать поездку для оценки")
     private RentalModel rental;
